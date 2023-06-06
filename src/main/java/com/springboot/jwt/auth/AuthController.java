@@ -1,7 +1,6 @@
 package com.springboot.jwt.auth;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class AuthController {
     @GetMapping("/say-hello")
     public Map<String, String> sayHello() {
         Map<String, String> response = new HashMap<>();
-        response.put("message", "its ok bb");
+        response.put("message", "Hello !");
         return response;
     }
 

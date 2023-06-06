@@ -22,8 +22,8 @@ public class SecurityConfig {
     private final AuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
                 .cors()
                 .and()
                 .csrf().disable()
@@ -31,15 +31,18 @@ public class SecurityConfig {
                 .and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
+
                 .authorizeHttpRequests()
-                .requestMatchers("api/v1/auth/**").permitAll()
-                .requestMatchers("api/v1/demo/users-only").hasAnyRole(Role.USER.name())
-                .requestMatchers("api/v1/demo/admins-only").hasAnyRole(Role.ADMIN.name())
+                .requestMatchers("/api/v1/auth/**").permitAll() /* n'importe qui a accès à cet url */
+                .requestMatchers("/api/v1/demo/users-only").hasAnyRole(Role.USER.name()) /* ROLE_USER */
+                .requestMatchers("/api/v1/demo/admin-only").hasAnyRole(Role.ADMIN.name()) /* ROLE_ADMIN */
+
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        return httpSecurity.build();
+
+        return http.build();
 
     }
 }
