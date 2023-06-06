@@ -1,4 +1,4 @@
-package com.springboot.jwt.user;
+package com.lgda.backend.user;
 
 public enum Role {
     ADMIN,

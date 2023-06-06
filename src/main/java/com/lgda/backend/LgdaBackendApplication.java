@@ -1,13 +1,13 @@
-package com.springboot.jwt;
+package com.lgda.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CoursJwtApplication {
+public class LgdaBackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CoursJwtApplication.class, args);
+        SpringApplication.run(LgdaBackendApplication.class, args);
     }
 
 }

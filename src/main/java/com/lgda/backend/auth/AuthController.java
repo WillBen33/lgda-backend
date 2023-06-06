@@ -1,4 +1,4 @@
-package com.springboot.jwt.auth;
+package com.lgda.backend.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

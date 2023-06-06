@@ -1,7 +1,7 @@
-package com.springboot.jwt.config;
+package com.lgda.backend.config;
 
-import com.springboot.jwt.filter.JwtAuthenticationFilter;
-import com.springboot.jwt.user.Role;
+import com.lgda.backend.filter.JwtAuthenticationFilter;
+import com.lgda.backend.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +43,5 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-
     }
 }

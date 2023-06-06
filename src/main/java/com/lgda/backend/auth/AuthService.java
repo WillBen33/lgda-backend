@@ -1,8 +1,8 @@
-package com.springboot.jwt.auth;
+package com.lgda.backend.auth;
 
-import com.springboot.jwt.user.User;
-import com.springboot.jwt.user.UserRepository;
-import com.springboot.jwt.util.JwtService;
+import com.lgda.backend.user.User;
+import com.lgda.backend.user.UserRepository;
+import com.lgda.backend.util.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,13 +23,7 @@ public class AuthService {
     public String register(RegisterRequest registerRequest) throws Exception {
 
         if (!userRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
-            var user = User.builder()
-                    .firstname(registerRequest.getFirstname())
-                    .lastname(registerRequest.getLastname())
-                    .email(registerRequest.getEmail())
-                    .password(passwordEncoder.encode(registerRequest.getPassword()))
-                    .role("ROLE_USER")
-                    .build();
+            var user = User.builder().firstname(registerRequest.getFirstname()).lastname(registerRequest.getLastname()).email(registerRequest.getEmail()).password(passwordEncoder.encode(registerRequest.getPassword())).role("ROLE_USER").build();
 
             userRepository.save(user);
 
@@ -43,12 +37,7 @@ public class AuthService {
 
     public AuthResponse authenticate(AuthRequest request) {
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow();
 
@@ -56,8 +45,6 @@ public class AuthService {
         extraClaims.put("role", user.getRole().toString());
 
         String jwtToken = jwtService.generateToken(new HashMap<>(extraClaims), user);
-        return AuthResponse.builder()
-                .token(jwtToken)
-                .build();
+        return AuthResponse.builder().token(jwtToken).build();
     }
 }

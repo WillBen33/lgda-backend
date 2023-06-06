@@ -1,4 +1,4 @@
-package com.springboot.jwt.config;
+package com.lgda.backend.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,15 +24,15 @@ public class AuthenticationEntryPoint implements org.springframework.security.we
 
         Map<String, String> error = new HashMap<>();
 
-        if(request.getAttribute("expired_exception") != null){
+        if (request.getAttribute("expired_exception") != null) {
             error.put("is_token_expired", "true");
             error.put("error_message", request.getAttribute("expired_exception").toString());
         }
-        if(request.getAttribute("malformed_exception") != null){
+        if (request.getAttribute("malformed_exception") != null) {
             error.put("is_jwt_malformed", "true");
             error.put("error_message", request.getAttribute("malformed_exception").toString());
         }
-        if(request.getAttribute("jwt_exception") != null){
+        if (request.getAttribute("jwt_exception") != null) {
             error.put("is_jwt_exception", "true");
             error.put("error_message", request.getAttribute("jwt_exception").toString());
         }

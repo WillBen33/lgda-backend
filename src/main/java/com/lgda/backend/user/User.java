@@ -1,4 +1,4 @@
-package com.springboot.jwt.user;
+package com.lgda.backend.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +25,9 @@ public class User implements UserDetails {
     private String lastname;
     private String email;
     private String password;
+    private String billingAdress;
+    private String deliveryAddress;
+    private String phone;
     private String role;
 
     @Override
